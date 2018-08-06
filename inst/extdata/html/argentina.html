@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Corpus: REUTERS</title>
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script><style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+ /* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<h2>Corpus: REUTERS</h2>
+
+<h3>places: argentina</h3>
+
+<p><span id="3997" token="Argentine" left="34" right="43">Argentine</span> <span id="3998" token="crude" left="44" right="49">crude</span> <span id="3999" token="oil" left="50" right="53">oil</span> <span id="4000" token="production" left="54" right="64">production</span> <span id="4001" token="was" left="65" right="68">was</span> <span id="4002" token="down" left="69" right="73">down</span> <span id="4003" token="10.8" left="74" right="78">10.8</span> <span id="4004" token="pct" left="79" right="82">pct</span> <span id="4005" token="in" left="83" right="85">in</span> <span id="4006" token="January" left="86" right="93">January</span> <span id="4007" token="1987" left="94" right="98">1987</span> <span id="4008" token="to" left="99" right="101">to</span> <span id="4009" token="12.32" left="102" right="107">12.32</span> <span id="4010" token="mln" left="108" right="111">mln</span> <span id="4011" token="barrels" left="112" right="119">barrels</span> <span id="4012" token="from" left="120" right="124">from</span> <span id="4013" token="13.81" left="125" right="130">13.81</span> <span id="4014" token="mln" left="131" right="134">mln</span> <span id="4015" token="barrels" left="135" right="142">barrels</span> <span id="4016" token="in" left="143" right="145">in</span> <span id="4017" token="January" left="146" right="153">January</span> <span id="4018" token="1986" left="154" right="158">1986</span> <span id="4019" token="Yacimientos" left="159" right="170">Yacimientos</span> <span id="4020" token="Petroliferos" left="171" right="183">Petroliferos</span> <span id="4021" token="Fiscales" left="184" right="192">Fiscales</span> <span id="4022" token="said" left="193" right="197">said</span> <span id="4023" token="January" left="198" right="205">January</span> <span id="4024" token="1987" left="206" right="210">1987</span> <span id="4025" token="natural" left="211" right="218">natural</span> <span id="4026" token="gas" left="219" right="222">gas</span> <span id="4027" token="output" left="223" right="229">output</span> <span id="4028" token="totalled" left="230" right="238">totalled</span> <span id="4029" token="1.15" left="239" right="243">1.15</span> <span id="4030" token="billion" left="244" right="251">billion</span> <span id="4031" token="cubic" left="252" right="257">cubic</span> <span id="4032" token="metrers" left="258" right="265">metrers</span> <span id="4033" token="3.6" left="266" right="269">3.6</span> <span id="4034" token="pct" left="270" right="273">pct</span> <span id="4035" token="higher" left="274" right="280">higher</span> <span id="4036" token="than" left="281" right="285">than</span> <span id="4037" token="1.11" left="286" right="290">1.11</span> <span id="4038" token="billion" left="291" right="298">billion</span> <span id="4039" token="cubic" left="299" right="304">cubic</span> <span id="4040" token="metres" left="305" right="311">metres</span> <span id="4041" token="produced" left="312" right="320">produced</span> <span id="4042" token="in" left="321" right="323">in</span> <span id="4043" token="January" left="324" right="331">January</span> <span id="4044" token="1986" left="332" right="336">1986</span> <span id="4045" token="Yacimientos" left="337" right="348">Yacimientos</span> <span id="4046" token="Petroliferos" left="349" right="361">Petroliferos</span> <span id="4047" token="Fiscales" left="362" right="370">Fiscales</span> <span id="4048" token="added" left="371" right="376">added</span> <span id="4049" token="Reuter" left="377" right="383">Reuter</span> </p>
+
+</body>
+</html>

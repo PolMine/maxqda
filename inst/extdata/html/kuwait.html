@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Corpus: REUTERS</title>
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script><style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+ /* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<h2>Corpus: REUTERS</h2>
+
+<h3>places: kuwait</h3>
+
+<p><span id="3071" token="Kuwait's" left="31" right="39">Kuwait's</span> <span id="3072" token="oil" left="40" right="43">oil</span> <span id="3073" token="minister" left="44" right="52">minister</span> <span id="3074" token="said" left="53" right="57">said</span> <span id="3075" token="in" left="58" right="60">in</span> <span id="3076" token="a" left="61" right="62">a</span> <span id="3077" token="newspaper" left="63" right="72">newspaper</span> <span id="3078" token="interview" left="73" right="82">interview</span> <span id="3079" token="that" left="83" right="87">that</span> <span id="3080" token="there" left="88" right="93">there</span> <span id="3081" token="were" left="94" right="98">were</span> <span id="3082" token="no" left="99" right="101">no</span> <span id="3083" token="plans" left="102" right="107">plans</span> <span id="3084" token="for" left="108" right="111">for</span> <span id="3085" token="an" left="112" right="114">an</span> <span id="3086" token="emergency" left="115" right="124">emergency</span> <span id="3087" token="OPEC" left="125" right="129">OPEC</span> <span id="3088" token="meeting" left="130" right="137">meeting</span> <span id="3089" token="after" left="138" right="143">after</span> <span id="3090" token="the" left="144" right="147">the</span> <span id="3091" token="recent" left="148" right="154">recent</span> <span id="3092" token="weakness" left="155" right="163">weakness</span> <span id="3093" token="in" left="164" right="166">in</span> <span id="3094" token="world" left="167" right="172">world</span> <span id="3095" token="oil" left="173" right="176">oil</span> <span id="3096" token="prices" left="177" right="183">prices</span> <span id="3097" token="Sheikh" left="184" right="190">Sheikh</span> <span id="3098" token="Ali" left="191" right="194">Ali</span> <span id="3099" token="al" left="195" right="197">al</span> <span id="3100" token="Khalifa" left="198" right="205">Khalifa</span> <span id="3101" token="al" left="206" right="208">al</span> <span id="3102" token="Sabah" left="209" right="214">Sabah</span> <span id="3103" token="was" left="215" right="218">was</span> <span id="3104" token="quoted" left="219" right="225">quoted</span> <span id="3105" token="by" left="226" right="228">by</span> <span id="3106" token="the" left="229" right="232">the</span> <span id="3107" token="local" left="233" right="238">local</span> <span id="3108" token="daily" left="239" right="244">daily</span> <span id="3109" token="al" left="245" right="247">al</span> <span id="3110" token="Qabas" left="248" right="253">Qabas</span> <span id="3111" token="as" left="254" right="256">as</span> <span id="3112" token="saying" left="257" right="263">saying</span> <span id="3113" token="that" left="264" right="268">that</span> <span id="3114" token="none" left="269" right="273">none</span> <span id="3115" token="of" left="274" right="276">of</span> <span id="3116" token="the" left="277" right="280">the</span> <span id="3117" token="OPEC" left="281" right="285">OPEC</span> <span id="3118" token="members" left="286" right="293">members</span> <span id="3119" token="has" left="294" right="297">has</span> <span id="3120" token="asked" left="298" right="303">asked</span> <span id="3121" token="for" left="304" right="307">for</span> <span id="3122" token="such" left="308" right="312">such</span> <span id="3123" token="a" left="313" right="314">a</span> <span id="3124" token="meeting" left="315" right="322">meeting</span> <span id="3125" token="He" left="323" right="325">He</span> <span id="3126" token="also" left="326" right="330">also</span> <span id="3127" token="denied" left="331" right="337">denied</span> <span id="3128" token="that" left="338" right="342">that</span> <span id="3129" token="Kuwait" left="343" right="349">Kuwait</span> <span id="3130" token="was" left="350" right="353">was</span> <span id="3131" token="pumping" left="354" right="361">pumping</span> <span id="3132" token="above" left="362" right="367">above</span> <span id="3133" token="its" left="368" right="371">its</span> <span id="3134" token="OPEC" left="372" right="376">OPEC</span> <span id="3135" token="quota" left="377" right="382">quota</span> <span id="3136" token="of" left="383" right="385">of</span> <span id="3137" token="948,000" left="386" right="393">948,000</span> <span id="3138" token="barrels" left="394" right="401">barrels</span> <span id="3139" token="of" left="402" right="404">of</span> <span id="3140" token="crude" left="405" right="410">crude</span> <span id="3141" token="daily" left="411" right="416">daily</span> <span id="3142" token="bpd" left="417" right="420">bpd</span> <span id="3143" token="Crude" left="421" right="426">Crude</span> <span id="3144" token="oil" left="427" right="430">oil</span> <span id="3145" token="prices" left="431" right="437">prices</span> <span id="3146" token="fell" left="438" right="442">fell</span> <span id="3147" token="sharply" left="443" right="450">sharply</span> <span id="3148" token="last" left="451" right="455">last</span> <span id="3149" token="week" left="456" right="460">week</span> <span id="3150" token="as" left="461" right="463">as</span> <span id="3151" token="international" left="464" right="477">international</span> <span id="3152" token="oil" left="478" right="481">oil</span> <span id="3153" token="traders" left="482" right="489">traders</span> <span id="3154" token="and" left="490" right="493">and</span> <span id="3155" token="analysts" left="494" right="502">analysts</span> <span id="3156" token="estimated" left="503" right="512">estimated</span> <span id="3157" token="the" left="513" right="516">the</span> <span id="3158" token="13" left="517" right="519">13</span> <span id="3159" token="nation" left="520" right="526">nation</span> <span id="3160" token="OPEC" left="527" right="531">OPEC</span> <span id="3161" token="was" left="532" right="535">was</span> <span id="3162" token="pumping" left="536" right="543">pumping</span> <span id="3163" token="up" left="544" right="546">up</span> <span id="3164" token="to" left="547" right="549">to</span> <span id="3165" token="one" left="550" right="553">one</span> <span id="3166" token="million" left="554" right="561">million</span> <span id="3167" token="bpd" left="562" right="565">bpd</span> <span id="3168" token="over" left="566" right="570">over</span> <span id="3169" token="its" left="571" right="574">its</span> <span id="3170" token="self" left="575" right="579">self</span> <span id="3171" token="imposed" left="580" right="587">imposed</span> <span id="3172" token="limits" left="588" right="594">limits</span> <span id="3173" token="Reuter" left="595" right="601">Reuter</span> </p>
+
+</body>
+</html>

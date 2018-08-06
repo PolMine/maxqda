@@ -1,0 +1,25 @@
+Package: maxqda
+Type: Package
+Title: tools for text annotation
+Version: 0.3.3
+Date: 2018-06-17
+Author: Andreas Blaette
+Maintainer: Andreas Blaette <andreas.blaette@uni-due.de>
+Description: tools for text annotation
+Depends:
+    R6,
+    methods,
+    polmineR,
+    data.table,
+    xml2
+Imports:
+    DBI,
+    RSQLite,
+    tools
+LazyData: NA
+License: NA
+Collate:
+    'polmineR.anno_package.R'
+    'CoNLL.R'
+    'MAXQDA.R'
+RoxygenNote: 6.0.1

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Corpus: REUTERS</title>
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script><style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+ /* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<h2>Corpus: REUTERS</h2>
+
+<h3>places: qatar</h3>
+
+<p><span id="1816" token="The" left="30" right="33">The</span> <span id="1817" token="Gulf" left="34" right="38">Gulf</span> <span id="1818" token="oil" left="39" right="42">oil</span> <span id="1819" token="state" left="43" right="48">state</span> <span id="1820" token="of" left="49" right="51">of</span> <span id="1821" token="Qatar" left="52" right="57">Qatar</span> <span id="1822" token="recovering" left="58" right="68">recovering</span> <span id="1823" token="slightly" left="69" right="77">slightly</span> <span id="1824" token="from" left="78" right="82">from</span> <span id="1825" token="last" left="83" right="87">last</span> <span id="1826" token="year's" left="88" right="94">year's</span> <span id="1827" token="decline" left="95" right="102">decline</span> <span id="1828" token="in" left="103" right="105">in</span> <span id="1829" token="world" left="106" right="111">world</span> <span id="1830" token="oil" left="112" right="115">oil</span> <span id="1831" token="prices" left="116" right="122">prices</span> <span id="1832" token="announced" left="123" right="132">announced</span> <span id="1833" token="its" left="133" right="136">its</span> <span id="1834" token="first" left="137" right="142">first</span> <span id="1835" token="budget" left="143" right="149">budget</span> <span id="1836" token="since" left="150" right="155">since</span> <span id="1837" token="early" left="156" right="161">early</span> <span id="1838" token="1985" left="162" right="166">1985</span> <span id="1839" token="and" left="167" right="170">and</span> <span id="1840" token="projected" left="171" right="180">projected</span> <span id="1841" token="a" left="181" right="182">a</span> <span id="1842" token="deficit" left="183" right="190">deficit</span> <span id="1843" token="of" left="191" right="193">of</span> <span id="1844" token="5.472" left="194" right="199">5.472</span> <span id="1845" token="billion" left="200" right="207">billion</span> <span id="1846" token="riyals" left="208" right="214">riyals</span> <span id="1847" token="The" left="215" right="218">The</span> <span id="1848" token="deficit" left="219" right="226">deficit</span> <span id="1849" token="compared" left="227" right="235">compared</span> <span id="1850" token="with" left="236" right="240">with</span> <span id="1851" token="a" left="241" right="242">a</span> <span id="1852" token="shortfall" left="243" right="252">shortfall</span> <span id="1853" token="of" left="253" right="255">of</span> <span id="1854" token="7.3" left="256" right="259">7.3</span> <span id="1855" token="billion" left="260" right="267">billion</span> <span id="1856" token="riyals" left="268" right="274">riyals</span> <span id="1857" token="in" left="275" right="277">in</span> <span id="1858" token="the" left="278" right="281">the</span> <span id="1859" token="last" left="282" right="286">last</span> <span id="1860" token="published" left="287" right="296">published</span> <span id="1861" token="budget" left="297" right="303">budget</span> <span id="1862" token="for" left="304" right="307">for</span> <span id="1863" token="1985" left="308" right="312">1985</span> <span id="1864" token="86" left="313" right="315">86</span> <span id="1865" token="In" left="316" right="318">In</span> <span id="1866" token="a" left="319" right="320">a</span> <span id="1867" token="statement" left="321" right="330">statement</span> <span id="1868" token="outlining" left="331" right="340">outlining</span> <span id="1869" token="the" left="341" right="344">the</span> <span id="1870" token="budget" left="345" right="351">budget</span> <span id="1871" token="for" left="352" right="355">for</span> <span id="1872" token="the" left="356" right="359">the</span> <span id="1873" token="fiscal" left="360" right="366">fiscal</span> <span id="1874" token="year" left="367" right="371">year</span> <span id="1875" token="1987" left="372" right="376">1987</span> <span id="1876" token="88" left="377" right="379">88</span> <span id="1877" token="beginning" left="380" right="389">beginning</span> <span id="1878" token="today" left="390" right="395">today</span> <span id="1879" token="Finance" left="396" right="403">Finance</span> <span id="1880" token="and" left="404" right="407">and</span> <span id="1881" token="Petroleum" left="408" right="417">Petroleum</span> <span id="1882" token="Minister" left="418" right="426">Minister</span> <span id="1883" token="Sheikh" left="427" right="433">Sheikh</span> <span id="1884" token="Abdul" left="434" right="439">Abdul</span> <span id="1885" token="Aziz" left="440" right="444">Aziz</span> <span id="1886" token="bin" left="445" right="448">bin</span> <span id="1887" token="Khalifa" left="449" right="456">Khalifa</span> <span id="1888" token="al" left="457" right="459">al</span> <span id="1889" token="Thani" left="460" right="465">Thani</span> <span id="1890" token="said" left="466" right="470">said</span> <span id="1891" token="the" left="471" right="474">the</span> <span id="1892" token="government" left="475" right="485">government</span> <span id="1893" token="expected" left="486" right="494">expected</span> <span id="1894" token="to" left="495" right="497">to</span> <span id="1895" token="spend" left="498" right="503">spend</span> <span id="1896" token="12.217" left="504" right="510">12.217</span> <span id="1897" token="billion" left="511" right="518">billion</span> <span id="1898" token="riyals" left="519" right="525">riyals</span> <span id="1899" token="in" left="526" right="528">in</span> <span id="1900" token="the" left="529" right="532">the</span> <span id="1901" token="period" left="533" right="539">period</span> <span id="1902" token="Projected" left="540" right="549">Projected</span> <span id="1903" token="expenditure" left="550" right="561">expenditure</span> <span id="1904" token="in" left="562" right="564">in</span> <span id="1905" token="the" left="565" right="568">the</span> <span id="1906" token="1985" left="569" right="573">1985</span> <span id="1907" token="86" left="574" right="576">86</span> <span id="1908" token="budget" left="577" right="583">budget</span> <span id="1909" token="had" left="584" right="587">had</span> <span id="1910" token="been" left="588" right="592">been</span> <span id="1911" token="15.6" left="593" right="597">15.6</span> <span id="1912" token="billion" left="598" right="605">billion</span> <span id="1913" token="riyals" left="606" right="612">riyals</span> <span id="1914" token="Sheikh" left="613" right="619">Sheikh</span> <span id="1915" token="Abdul" left="620" right="625">Abdul</span> <span id="1916" token="Aziz" left="626" right="630">Aziz</span> <span id="1917" token="said" left="631" right="635">said</span> <span id="1918" token="government" left="636" right="646">government</span> <span id="1919" token="revenue" left="647" right="654">revenue</span> <span id="1920" token="would" left="655" right="660">would</span> <span id="1921" token="be" left="661" right="663">be</span> <span id="1922" token="about" left="664" right="669">about</span> <span id="1923" token="6.745" left="670" right="675">6.745</span> <span id="1924" token="billion" left="676" right="683">billion</span> <span id="1925" token="riyals" left="684" right="690">riyals</span> <span id="1926" token="down" left="691" right="695">down</span> <span id="1927" token="by" left="696" right="698">by</span> <span id="1928" token="about" left="699" right="704">about</span> <span id="1929" token="30" left="705" right="707">30</span> <span id="1930" token="pct" left="708" right="711">pct</span> <span id="1931" token="on" left="712" right="714">on</span> <span id="1932" token="the" left="715" right="718">the</span> <span id="1933" token="1985" left="719" right="723">1985</span> <span id="1934" token="86" left="724" right="726">86</span> <span id="1935" token="projected" left="727" right="736">projected</span> <span id="1936" token="revenue" left="737" right="744">revenue</span> <span id="1937" token="of" left="745" right="747">of</span> <span id="1938" token="9.7" left="748" right="751">9.7</span> <span id="1939" token="billion" left="752" right="759">billion</span> <span id="1940" token="The" left="760" right="763">The</span> <span id="1941" token="government" left="764" right="774">government</span> <span id="1942" token="failed" left="775" right="781">failed</span> <span id="1943" token="to" left="782" right="784">to</span> <span id="1944" token="publish" left="785" right="792">publish</span> <span id="1945" token="a" left="793" right="794">a</span> <span id="1946" token="1986" left="795" right="799">1986</span> <span id="1947" token="87" left="800" right="802">87</span> <span id="1948" token="budget" left="803" right="809">budget</span> <span id="1949" token="due" left="810" right="813">due</span> <span id="1950" token="to" left="814" right="816">to</span> <span id="1951" token="uncertainty" left="817" right="828">uncertainty</span> <span id="1952" token="surrounding" left="829" right="840">surrounding</span> <span id="1953" token="oil" left="841" right="844">oil</span> <span id="1954" token="revenues" left="845" right="853">revenues</span> <span id="1955" token="Sheikh" left="854" right="860">Sheikh</span> <span id="1956" token="Abdul" left="861" right="866">Abdul</span> <span id="1957" token="Aziz" left="867" right="871">Aziz</span> <span id="1958" token="said" left="872" right="876">said</span> <span id="1959" token="that" left="877" right="881">that</span> <span id="1960" token="during" left="882" right="888">during</span> <span id="1961" token="that" left="889" right="893">that</span> <span id="1962" token="year" left="894" right="898">year</span> <span id="1963" token="the" left="899" right="902">the</span> <span id="1964" token="government" left="903" right="913">government</span> <span id="1965" token="decided" left="914" right="921">decided</span> <span id="1966" token="to" left="922" right="924">to</span> <span id="1967" token="limit" left="925" right="930">limit</span> <span id="1968" token="recurrent" left="931" right="940">recurrent</span> <span id="1969" token="expenditure" left="941" right="952">expenditure</span> <span id="1970" token="each" left="953" right="957">each</span> <span id="1971" token="month" left="958" right="963">month</span> <span id="1972" token="to" left="964" right="966">to</span> <span id="1973" token="one" left="967" right="970">one</span> <span id="1974" token="twelfth" left="971" right="978">twelfth</span> <span id="1975" token="of" left="979" right="981">of</span> <span id="1976" token="the" left="982" right="985">the</span> <span id="1977" token="previous" left="986" right="994">previous</span> <span id="1978" token="fiscal" left="995" right="1001">fiscal</span> <span id="1979" token="year's" left="1002" right="1008">year's</span> <span id="1980" token="allocations" left="1009" right="1020">allocations</span> <span id="1981" token="minus" left="1021" right="1026">minus</span> <span id="1982" token="15" left="1027" right="1029">15</span> <span id="1983" token="pct" left="1030" right="1033">pct</span> <span id="1984" token="He" left="1034" right="1036">He</span> <span id="1985" token="urged" left="1037" right="1042">urged</span> <span id="1986" token="heads" left="1043" right="1048">heads</span> <span id="1987" token="of" left="1049" right="1051">of</span> <span id="1988" token="government" left="1052" right="1062">government</span> <span id="1989" token="departments" left="1063" right="1074">departments</span> <span id="1990" token="and" left="1075" right="1078">and</span> <span id="1991" token="public" left="1079" right="1085">public</span> <span id="1992" token="institutions" left="1086" right="1098">institutions</span> <span id="1993" token="to" left="1099" right="1101">to</span> <span id="1994" token="help" left="1102" right="1106">help</span> <span id="1995" token="the" left="1107" right="1110">the</span> <span id="1996" token="government" left="1111" right="1121">government</span> <span id="1997" token="rationalise" left="1122" right="1133">rationalise</span> <span id="1998" token="expenditure" left="1134" right="1145">expenditure</span> <span id="1999" token="He" left="1146" right="1148">He</span> <span id="2000" token="did" left="1149" right="1152">did</span> <span id="2001" token="not" left="1153" right="1156">not</span> <span id="2002" token="say" left="1157" right="1160">say</span> <span id="2003" token="how" left="1161" right="1164">how</span> <span id="2004" token="the" left="1165" right="1168">the</span> <span id="2005" token="1987" left="1169" right="1173">1987</span> <span id="2006" token="88" left="1174" right="1176">88</span> <span id="2007" token="budget" left="1177" right="1183">budget</span> <span id="2008" token="shortfall" left="1184" right="1193">shortfall</span> <span id="2009" token="would" left="1194" right="1199">would</span> <span id="2010" token="be" left="1200" right="1202">be</span> <span id="2011" token="covered" left="1203" right="1210">covered</span> <span id="2012" token="Sheikh" left="1211" right="1217">Sheikh</span> <span id="2013" token="Abdul" left="1218" right="1223">Abdul</span> <span id="2014" token="Aziz" left="1224" right="1228">Aziz</span> <span id="2015" token="said" left="1229" right="1233">said</span> <span id="2016" token="plans" left="1234" right="1239">plans</span> <span id="2017" token="to" left="1240" right="1242">to</span> <span id="2018" token="limit" left="1243" right="1248">limit</span> <span id="2019" token="expenditure" left="1249" right="1260">expenditure</span> <span id="2020" token="in" left="1261" right="1263">in</span> <span id="2021" token="1986" left="1264" right="1268">1986</span> <span id="2022" token="87" left="1269" right="1271">87</span> <span id="2023" token="had" left="1272" right="1275">had</span> <span id="2024" token="been" left="1276" right="1280">been</span> <span id="2025" token="taken" left="1281" right="1286">taken</span> <span id="2026" token="in" left="1287" right="1289">in</span> <span id="2027" token="order" left="1290" right="1295">order</span> <span id="2028" token="to" left="1296" right="1298">to</span> <span id="2029" token="relieve" left="1299" right="1306">relieve</span> <span id="2030" token="the" left="1307" right="1310">the</span> <span id="2031" token="burden" left="1311" right="1317">burden</span> <span id="2032" token="placed" left="1318" right="1324">placed</span> <span id="2033" token="on" left="1325" right="1327">on</span> <span id="2034" token="the" left="1328" right="1331">the</span> <span id="2035" token="country's" left="1332" right="1341">country's</span> <span id="2036" token="foreign" left="1342" right="1349">foreign</span> <span id="2037" token="reserves" left="1350" right="1358">reserves</span> <span id="2038" token="He" left="1359" right="1361">He</span> <span id="2039" token="added" left="1362" right="1367">added</span> <span id="2040" token="in" left="1368" right="1370">in</span> <span id="2041" token="1987" left="1371" right="1375">1987</span> <span id="2042" token="88" left="1376" right="1378">88</span> <span id="2043" token="some" left="1379" right="1383">some</span> <span id="2044" token="2.766" left="1384" right="1389">2.766</span> <span id="2045" token="billion" left="1390" right="1397">billion</span> <span id="2046" token="riyals" left="1398" right="1404">riyals</span> <span id="2047" token="had" left="1405" right="1408">had</span> <span id="2048" token="been" left="1409" right="1413">been</span> <span id="2049" token="allocated" left="1414" right="1423">allocated</span> <span id="2050" token="for" left="1424" right="1427">for</span> <span id="2051" token="major" left="1428" right="1433">major</span> <span id="2052" token="projects" left="1434" right="1442">projects</span> <span id="2053" token="including" left="1443" right="1452">including</span> <span id="2054" token="housing" left="1453" right="1460">housing</span> <span id="2055" token="and" left="1461" right="1464">and</span> <span id="2056" token="public" left="1465" right="1471">public</span> <span id="2057" token="buildings" left="1472" right="1481">buildings</span> <span id="2058" token="social" left="1482" right="1488">social</span> <span id="2059" token="services" left="1489" right="1497">services</span> <span id="2060" token="health" left="1498" right="1504">health</span> <span id="2061" token="education" left="1505" right="1514">education</span> <span id="2062" token="transport" left="1515" right="1524">transport</span> <span id="2063" token="and" left="1525" right="1528">and</span> <span id="2064" token="communications" left="1529" right="1543">communications</span> <span id="2065" token="electricity" left="1544" right="1555">electricity</span> <span id="2066" token="and" left="1556" right="1559">and</span> <span id="2067" token="water" left="1560" right="1565">water</span> <span id="2068" token="industry" left="1566" right="1574">industry</span> <span id="2069" token="and" left="1575" right="1578">and</span> <span id="2070" token="agriculture" left="1579" right="1590">agriculture</span> <span id="2071" token="No" left="1591" right="1593">No</span> <span id="2072" token="figure" left="1594" right="1600">figure</span> <span id="2073" token="was" left="1601" right="1604">was</span> <span id="2074" token="revealed" left="1605" right="1613">revealed</span> <span id="2075" token="for" left="1614" right="1617">for</span> <span id="2076" token="expenditure" left="1618" right="1629">expenditure</span> <span id="2077" token="on" left="1630" right="1632">on</span> <span id="2078" token="defence" left="1633" right="1640">defence</span> <span id="2079" token="and" left="1641" right="1644">and</span> <span id="2080" token="security" left="1645" right="1653">security</span> <span id="2081" token="There" left="1654" right="1659">There</span> <span id="2082" token="was" left="1660" right="1663">was</span> <span id="2083" token="also" left="1664" right="1668">also</span> <span id="2084" token="no" left="1669" right="1671">no</span> <span id="2085" token="projection" left="1672" right="1682">projection</span> <span id="2086" token="for" left="1683" right="1686">for</span> <span id="2087" token="oil" left="1687" right="1690">oil</span> <span id="2088" token="revenue" left="1691" right="1698">revenue</span> <span id="2089" token="Qatar" left="1699" right="1704">Qatar</span> <span id="2090" token="an" left="1705" right="1707">an</span> <span id="2091" token="OPEC" left="1708" right="1712">OPEC</span> <span id="2092" token="member" left="1713" right="1719">member</span> <span id="2093" token="has" left="1720" right="1723">has</span> <span id="2094" token="an" left="1724" right="1726">an</span> <span id="2095" token="output" left="1727" right="1733">output</span> <span id="2096" token="ceiling" left="1734" right="1741">ceiling</span> <span id="2097" token="of" left="1742" right="1744">of</span> <span id="2098" token="285,000" left="1745" right="1752">285,000</span> <span id="2099" token="barrels" left="1753" right="1760">barrels</span> <span id="2100" token="per" left="1761" right="1764">per</span> <span id="2101" token="day" left="1765" right="1768">day</span> <span id="2102" token="Sheikh" left="1769" right="1775">Sheikh</span> <span id="2103" token="Abdul" left="1776" right="1781">Abdul</span> <span id="2104" token="Aziz" left="1782" right="1786">Aziz</span> <span id="2105" token="said" left="1787" right="1791">said</span> <span id="2106" token="Our" left="1792" right="1795">Our</span> <span id="2107" token="expectations" left="1796" right="1808">expectations</span> <span id="2108" token="of" left="1809" right="1811">of</span> <span id="2109" token="positive" left="1812" right="1820">positive</span> <span id="2110" token="signs" left="1821" right="1826">signs</span> <span id="2111" token="regarding" left="1827" right="1836">regarding</span> <span id="2112" token="oil" left="1837" right="1840">oil</span> <span id="2113" token="price" left="1841" right="1846">price</span> <span id="2114" token="trends" left="1847" right="1853">trends</span> <span id="2115" token="foremost" left="1854" right="1862">foremost</span> <span id="2116" token="among" left="1863" right="1868">among</span> <span id="2117" token="them" left="1869" right="1873">them</span> <span id="2118" token="OPEC's" left="1874" right="1880">OPEC's</span> <span id="2119" token="determination" left="1881" right="1894">determination</span> <span id="2120" token="to" left="1895" right="1897">to</span> <span id="2121" token="shoulder" left="1898" right="1906">shoulder</span> <span id="2122" token="its" left="1907" right="1910">its</span> <span id="2123" token="responsibilites" left="1911" right="1926">responsibilites</span> <span id="2124" token="and" left="1927" right="1930">and</span> <span id="2125" token="protect" left="1931" right="1938">protect</span> <span id="2126" token="its" left="1939" right="1942">its</span> <span id="2127" token="wealth" left="1943" right="1949">wealth</span> <span id="2128" token="have" left="1950" right="1954">have</span> <span id="2129" token="helped" left="1955" right="1961">helped</span> <span id="2130" token="us" left="1962" right="1964">us</span> <span id="2131" token="make" left="1965" right="1969">make</span> <span id="2132" token="reasonable" left="1970" right="1980">reasonable</span> <span id="2133" token="estimates" left="1981" right="1990">estimates</span> <span id="2134" token="for" left="1991" right="1994">for</span> <span id="2135" token="the" left="1995" right="1998">the</span> <span id="2136" token="coming" left="1999" right="2005">coming</span> <span id="2137" token="year's" left="2006" right="2012">year's</span> <span id="2138" token="revenue" left="2013" right="2020">revenue</span> <span id="2139" token="on" left="2021" right="2023">on</span> <span id="2140" token="the" left="2024" right="2027">the</span> <span id="2141" token="basis" left="2028" right="2033">basis</span> <span id="2142" token="of" left="2034" right="2036">of</span> <span id="2143" token="our" left="2037" right="2040">our</span> <span id="2144" token="assigned" left="2041" right="2049">assigned</span> <span id="2145" token="quota" left="2050" right="2055">quota</span> <span id="2146" token="REUTER" left="2056" right="2062">REUTER</span> </p>
+
+</body>
+</html>

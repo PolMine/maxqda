@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Corpus: REUTERS</title>
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script><style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+ /* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<h2>Corpus: REUTERS</h2>
+
+<h3>places: canada</h3>
+
+<p><span id="536" token="Texaco" left="31" right="37">Texaco</span> <span id="537" token="Canada" left="38" right="44">Canada</span> <span id="538" token="said" left="45" right="49">said</span> <span id="539" token="it" left="50" right="52">it</span> <span id="540" token="lowered" left="53" right="60">lowered</span> <span id="541" token="the" left="61" right="64">the</span> <span id="542" token="contract" left="65" right="73">contract</span> <span id="543" token="price" left="74" right="79">price</span> <span id="544" token="it" left="80" right="82">it</span> <span id="545" token="will" left="83" right="87">will</span> <span id="546" token="pay" left="88" right="91">pay</span> <span id="547" token="for" left="92" right="95">for</span> <span id="548" token="crude" left="96" right="101">crude</span> <span id="549" token="oil" left="102" right="105">oil</span> <span id="550" token="64" left="106" right="108">64</span> <span id="551" token="Canadian" left="109" right="117">Canadian</span> <span id="552" token="cts" left="118" right="121">cts</span> <span id="553" token="a" left="122" right="123">a</span> <span id="554" token="barrel" left="124" right="130">barrel</span> <span id="555" token="effective" left="131" right="140">effective</span> <span id="556" token="today" left="141" right="146">today</span> <span id="557" token="The" left="147" right="150">The</span> <span id="558" token="decrease" left="151" right="159">decrease</span> <span id="559" token="brings" left="160" right="166">brings</span> <span id="560" token="the" left="167" right="170">the</span> <span id="561" token="company's" left="171" right="180">company's</span> <span id="562" token="posted" left="181" right="187">posted</span> <span id="563" token="price" left="188" right="193">price</span> <span id="564" token="for" left="194" right="197">for</span> <span id="565" token="the" left="198" right="201">the</span> <span id="566" token="benchmark" left="202" right="211">benchmark</span> <span id="567" token="grade" left="212" right="217">grade</span> <span id="568" token="Edmonton" left="218" right="226">Edmonton</span> <span id="569" token="Swann" left="227" right="232">Swann</span> <span id="570" token="Hills" left="233" right="238">Hills</span> <span id="571" token="Light" left="239" right="244">Light</span> <span id="572" token="Sweet" left="245" right="250">Sweet</span> <span id="573" token="to" left="251" right="253">to</span> <span id="574" token="22.26" left="254" right="259">22.26</span> <span id="575" token="Canadian" left="260" right="268">Canadian</span> <span id="576" token="dlrs" left="269" right="273">dlrs</span> <span id="577" token="a" left="274" right="275">a</span> <span id="578" token="bbl" left="276" right="279">bbl</span> <span id="579" token="Texaco" left="280" right="286">Texaco</span> <span id="580" token="Canada" left="287" right="293">Canada</span> <span id="581" token="last" left="294" right="298">last</span> <span id="582" token="changed" left="299" right="306">changed</span> <span id="583" token="its" left="307" right="310">its</span> <span id="584" token="crude" left="311" right="316">crude</span> <span id="585" token="oil" left="317" right="320">oil</span> <span id="586" token="postings" left="321" right="329">postings</span> <span id="587" token="on" left="330" right="332">on</span> <span id="588" token="Feb" left="333" right="336">Feb</span> <span id="589" token="19" left="337" right="339">19</span> <span id="590" token="Reuter" left="340" right="346">Reuter</span> </p>
+
+</body>
+</html>

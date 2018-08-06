@@ -1,0 +1,157 @@
+---
+title: "polmineR.anno - some sample workflows"
+author: "Andreas Blätte (andreas.blaette@uni-due.de)"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+%\VignetteIndexEntry{polmineR.anno - some sample workflows}
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEncoding{UTF-8}
+---
+
+```{r load_polmineR.anno}
+library(polmineR)
+library(polmineR.anno)
+```
+
+
+
+```{r, eval = FALSE}
+dir <- "/Users/blaette/Lab/gitlab/plprbttxt_annotations/2016_09_21"
+filename <- file.path(dir, "16_173_SPD_Dr__Hans-Ulrich_Krüger_2978462.tsv")
+P <- partition("PLPRBT", speaker_lp = 16, speaker_protocol_no = 173, speaker_name = "Hans-Ulrich Krüger")
+A <- polmineR.anno:::CoNLL$new(filename = filename, partition = P)
+A$getCorpusPositions()
+A$cpos
+```
+
+
+```{r}
+filenames <- list.files(dir)
+Encoding(filenames) <- "UTF-8"
+speakerNames <- sAttributes("PLPRBT", "speaker_name")
+dtList <- pbapply::pblapply(
+  filenames,
+  function(filename){
+    
+    # get legislative period and session
+    lp <- gsub("^(\\d+)_.*?$", "\\1", filename)
+    sessionNo <- gsub("^\\d+_(\\d+)_.*?$", "\\1", filename)
+
+    # get party from filename
+    party <- gsub("^\\d+_\\d+_([0-9A-ZÜ_]+)_.*?$", "\\1", filename)
+    if (grepl("^.*NDNIS_90_DIE_.*$", filename)) party <- "B90_DIE_GRUENEN"
+    if (grepl("fraktionslos", filename)) party <- "fraktionslos"
+    if (party == "F_D_P_") party <- "FDP"
+    
+    # get speaker from filename
+    speakerName <- gsub("^(.*)_\\d+\\.tsv$", "\\1", filename)
+    speakerName <- gsub("^\\d+_\\d+_[0-9A-ZÜ_]+_(.*?)?$", "\\1", speakerName)
+    if (grepl("NEN_", speakerName)) speakerName <- gsub("^.*NEN_", "", speakerName)
+    speakerName <- gsub("_", " ", speakerName)
+    speakerName <- gsub("^Dr\\s", "", speakerName)
+    speakerName <- gsub("\\s+[A-Z]\\s+", " ", speakerName)
+    speakerName <- gsub("^-Ing\\s", "", speakerName)
+    speakerName <- gsub("^\\s*(.*?)\\s*$", "\\1", speakerName)
+    
+    # match filename-speaker 
+    if (speakerName %in% speakerNames){
+      isPresent <- speakerName
+    } else {
+      matches <- agrep(speakerName, speakerNames)
+      if (length(matches) > 0){
+        isPresent <- speakerNames[matches[1]]
+      } else {
+        tmp <- iconv(strsplit(speakerName, split = "")[[1]], from = "UTF-8", to = "ISO-8859-1")
+        tmp <- tmp[!is.na(tmp)]
+        speakerNameNew <- iconv(paste(tmp, collapse = ""), from = "ISO-8859-1", to = "UTF-8")
+        matches <- agrep(speakerNameNew, speakerNames)
+        if (length(matches) > 0){
+          isPresent <- speakerNames[matches[1]]
+        } else {
+          splitted <- strsplit(speakerName, " ")[[1]]
+          lastName <- splitted[length(splitted)]
+          lastTry <- grep(paste(lastName, "$", sep = ""), speakerNames, value = T)
+          if (length(lastTry) > 0){
+            isPresent <- lastTry[1]
+          } else {
+            isPresent <- "XXX"
+          }
+        }
+      }
+      
+    }
+    sAttributes <- data.table(
+      filename = filename,
+      speaker_lp = lp,
+      speaker_protocol_no = sessionNo,
+      speaker_parliamentary_group = party,
+      speaker_name = isPresent
+    )
+  }
+)
+dt <- rbindlist(dtList)
+dt[["speaker_name"]] <- enc2utf8(dt[["speaker_name"]]) # encodings are mixed 
+
+# manual correction of known problems
+dt[speaker_name == "Peter Glotz", speaker_name := "Peter Götz"]
+dt[speaker_name == "Heinrich L. Kolb", speaker_name := "Heinrich Leonhard Kolb"]
+dt[speaker_name == "Kersten Naumann", speaker_name := "Kersten Steinke"]
+dt[speaker_name == "Sevim Dagdelen", speaker_name := "Sevim Dadelen"]
+```
+
+
+```{r}
+CoNLL_objects <- pbapply::pblapply(
+  setNames(1:nrow(tab), tab[["filename"]]),
+  function(i){
+    P <- partition(
+      "PLPRBT",
+      def = as.list(unlist(dt[i, c("speaker_protocol_no", "speaker_name", "speaker_lp")])),
+      verbose = FALSE
+      )
+    if (is.null(P)) return( NULL )
+    C <- CoNLL$new(filename = file.path(dir, filenames[i]), partition = P)
+    C$getCorpusPositions()
+    C
+  }
+)
+```
+
+### Check whether matches have been successful 
+
+```{r}
+View(dt[which(sapply(CoNLL_objects, is.null) == TRUE)])
+```
+
+```{r}
+regions <- rbindlist(lapply(CoNLL_objects, function(x) x$cpos))
+regions <- regions[is.na(cpos_left) == FALSE] # check why this is necessary!!
+setnames(regions, old = "id", new = "cap")
+```
+
+```{r}
+regions[, quote := NULL]
+regions[, id = ]
+regionsToken <- regions[, {
+  data.table(
+    cpos_left = .SD[["cpos_left"]]:.SD[["cpos_right"]],
+    cpos_right = .SD[["cpos_left"]]:.SD[["cpos_right"]],
+    cap = .SD[["cap"]])
+  }, by = seq_len(nrow(regions))]
+regionsToken[,seq_len := NULL]
+regionsToken2 <- regionsToken[, {list(cap = paste(.SD[["cap"]], collapse = "|"))}, by = cpos_left]
+regionsToken2[, cpos_right := cpos_left]
+setcolorder(regionsToken2, neworder = c("cpos_left", "cpos_right", "cap"))
+```
+
+```{r}
+library(ctk)
+Enc <- Encoder$new(
+  corpus = "PLPRBT",
+  registryDir = Sys.getenv("CORPUS_REGISTRY"),
+  dataDir = RegistryFile$new("PLPRBT")$getHome()
+  )
+Enc$metadata <- regionsToken2
+Enc$encodeStructuralAttribute("cap")
+```
