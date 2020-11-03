@@ -1,32 +1,11 @@
----
-title: "Preparing HTML documents"
-author: "Andreas Blaette"
-date: "1 11 2017"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Initialisation
-
-The package 'polmineR' is required. We use the "REUTERS"-corpus that is included in the package.
-
-```{r loading_libraries}
 library(polmineR)
 use("polmineR")
-```
 
 
-```{r}
-setwd("~/Lab/gitlab/polmineR.anno/inst/extdata/html")
-```
+setwd("~/Lab/github/maxqda/inst/extdata/html")
 
-```{r}
 for (country in c("canada", "qatar", "argentina", "kuwait")){
   P <- partition("REUTERS", places = country, name = country)
   H <- html(P, cpos = TRUE, charoffset = TRUE)
   cat(as.character(H), file = sprintf("%s.html", country))
 }
-```
