@@ -1,17 +1,17 @@
 ---
-title: "polmineR.anno - some sample workflows"
+title: "maxqda - some sample workflows"
 author: "Andreas Blätte (andreas.blaette@uni-due.de)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-%\VignetteIndexEntry{polmineR.anno - some sample workflows}
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{maxqda - some sample workflows}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-```{r load_polmineR.anno}
+```{r load_polmineR.anno, eval = FALSE}
 library(polmineR)
-library(polmineR.anno)
+library(maxqda)
 ```
 
 
@@ -26,7 +26,7 @@ A$cpos
 ```
 
 
-```{r}
+```{r, eval = FALSE}
 filenames <- list.files(dir)
 Encoding(filenames) <- "UTF-8"
 speakerNames <- sAttributes("PLPRBT", "speaker_name")
@@ -101,7 +101,7 @@ dt[speaker_name == "Sevim Dagdelen", speaker_name := "Sevim Dadelen"]
 ```
 
 
-```{r}
+```{r eval = FALSE}
 CoNLL_objects <- pbapply::pblapply(
   setNames(1:nrow(tab), tab[["filename"]]),
   function(i){
@@ -120,17 +120,17 @@ CoNLL_objects <- pbapply::pblapply(
 
 ### Check whether matches have been successful 
 
-```{r}
+```{r eval = FALSE}
 View(dt[which(sapply(CoNLL_objects, is.null) == TRUE)])
 ```
 
-```{r}
+```{r eval = FALSE}
 regions <- rbindlist(lapply(CoNLL_objects, function(x) x$cpos))
 regions <- regions[is.na(cpos_left) == FALSE] # check why this is necessary!!
 setnames(regions, old = "id", new = "cap")
 ```
 
-```{r}
+```{r eval = FALSE}
 regions[, quote := NULL]
 regions[, id = ]
 regionsToken <- regions[, {
@@ -145,7 +145,7 @@ regionsToken2[, cpos_right := cpos_left]
 setcolorder(regionsToken2, neworder = c("cpos_left", "cpos_right", "cap"))
 ```
 
-```{r}
+```{r eval = FALSE}
 library(ctk)
 Enc <- Encoder$new(
   corpus = "PLPRBT",

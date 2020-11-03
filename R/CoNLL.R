@@ -2,24 +2,11 @@
 #' 
 #' Toolset for a workflow to reshape a CoNLL input to a CWB compatible format.
 #' 
-#' @param filename name of file to be processed
-#' @param partition partition where to locate annotations
-#' 
-#' @field filename character string, the filename of the CoNLL annotation
-#' @field cpos a data.table with the columns "cpos_left" and "cpos_right" defining the regions of the annotations
-#' @field partition a partition object, generated on the basis of sAttributes
-#' @section Methods:
-#' \describe{
-#'   \item{\code{$new(filename, partition)}}{}
-#'   \item{\code{$load()}}{Read the content of the file specified upon initialization by \code{filename},
-#'   and keep the parsed input in the slot \code{tab}}
-#'   \item{\code{$getCorpusPositions}}{}
-#' }
 #' @examples
-#' if (require("GermaParl")){
+#' if (FALSE){
 #'   use("GermaParl")
-#'   filename <- system.file(package = "polmineR.anno", "extdata", "CoNLL", "16_126_FDP_Markus_Löning_2871305.tsv")
-#'   P <- partition("GERMAPARL", text_lp = "16", text_protocol_no = "126", text_speaker = "Markus Löning")
+#'   filename <- system.file(package = "maxqda", "extdata", "CoNLL", "16_126_FDP_Markus_Loening_2871305.tsv")
+#'   P <- partition("GERMAPARL", text_lp = "16", text_protocol_no = "126", text_speaker = "Markus Loening")
 #'   Anno <- CoNLL$new(filename = filename, partition = P)
 #'   Anno$getCorpusPositions()
 #'   annotations <- Anno$cpos
@@ -28,17 +15,27 @@
 #' }
 #' @export CoNLL
 #' @importFrom data.table rbindlist setkeyv setcolorder
+#' @importFrom htmltools html_print
 CoNLL <- R6Class(
   
   "CoNLL",
   
   public = list(
     
+    #' @field tab STORY TO BE TOLD
     tab = NULL,
+    #' @field filename character string, the filename of the CoNLL annotation
     filename = NULL, # a character string
+    
+    #' @field partition a partition object, generated on the basis of sAttributes
+    
     partition = NULL, # partition
+    
+    #' @field cpos a data.table with the columns "cpos_left" and "cpos_right" defining the regions of the annotations
     cpos = NULL,
     
+    #' @param filename name of file to be processed
+    #' @param partition partition where to locate annotations
     initialize = function(filename, partition){
       stopifnot(!is.null(filename))
       self$filename <- filename
@@ -55,9 +52,8 @@ CoNLL <- R6Class(
       self$partition <- partition
     },
     
-    load = function(){
-    },
-    
+    #' @description
+    #' STORY TO BE TOLD
     getCorpusPositions = function(){
       # create a table with three coumns: "id", "start", "end"
       posList <- lapply(

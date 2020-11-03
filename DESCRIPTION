@@ -1,25 +1,30 @@
 Package: maxqda
 Type: Package
-Title: tools for text annotation
-Version: 0.3.3
-Date: 2018-06-17
+Title: Use MAXQDA for Corpus Annotations
+Version: 0.3.3.9001
+Date: 2020-11-03
 Author: Andreas Blaette
 Maintainer: Andreas Blaette <andreas.blaette@uni-due.de>
-Description: tools for text annotation
-Depends:
-    R6,
-    methods,
-    polmineR,
-    data.table,
-    xml2
+Description: MAXQDA is a qualitative data analysis. This package provides functionality 
+  to extract annotations from MAXQDA data for text mining annotation tasks.
 Imports:
+    R6,
+    data.table,
+    xml2,
     DBI,
     RSQLite,
-    tools
-LazyData: NA
-License: NA
+    tools,
+    htmltools
+Suggests:
+    polmineR,
+    knitr
+LazyData: true
+VignetteBuilder: knitr
+License: GPL-3
 Collate:
     'maxqda-package.R'
     'CoNLL.R'
     'MAXQDA.R'
-RoxygenNote: 6.0.1
+Encoding: UTF-8
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
