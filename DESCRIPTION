@@ -19,7 +19,7 @@ Imports:
 LazyData: NA
 License: NA
 Collate:
-    'polmineR.anno_package.R'
+    'maxqda-package.R'
     'CoNLL.R'
     'MAXQDA.R'
 RoxygenNote: 6.0.1

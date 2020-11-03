@@ -9,15 +9,18 @@
 #'   \item{\code{initialize((dbFilename, htmlDir))}}{Create a new instance of 
 #'   class \code{MAXQDA}; the param \code{dbFilename} indicates the MAXQDA 
 #'   database, the \code{htmlDir} the directory where html files as generated 
-#'   with \code{polmineR} reside} \item{\code{getMaxqdaData()}}{Fill the fields
+#'   with \code{polmineR} reside}
+#'   \item{\code{getMaxqdaData()}}{Fill the fields
 #'   \code{codings}, \code{codewords}, and \code{texts} with \code{data.table}
 #'   by extracting the respective tables from the MAXQDA file specified by field
-#'   \code{dbFilename}} \item{\code{getOffsetDT(filename)}}{Extract
+#'   \code{dbFilename}}
+#'   \item{\code{getOffsetDT(filename)}}{Extract
 #'   \code{data.table} with character offset positions and corpus positions from
 #'   the html file specified by param \code{filename}} 
 #'   \item{\code{getOne(textId, offsetDT, corpus = "REUTERS")}}{Extract
 #'   annotations for one document; essentially a worker called by the method
-#'   \code{getAll}} \item{\code{getAll(verbose = TRUE)}}{Extract annotations for
+#'   \code{getAll}}
+#'   \item{\code{getAll(verbose = TRUE)}}{Extract annotations for
 #'   all documents that reside in the \code{htmlDir} that has been specified
 #'   upon initialization}
 #' }
