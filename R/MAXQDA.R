@@ -11,14 +11,13 @@
 #' @importFrom DBI dbConnect dbGetQuery dbDisconnect
 #' @importFrom RSQLite SQLite
 #' @importFrom tools file_path_sans_ext
+#' @importFrom polmineR get_token_stream encoding as.nativeEnc
 #' @rdname MAXQDA
 #' @examples
-#' \dontrun{
 #' maxfile <- system.file(package = "maxqda", "extdata", "maxqda", "reuters.mx12")
-#' htmlDir <- system.file(package = "maxqda", "extdata", "html")
+#' htmlDir <- system.file(package = "maxqda", "extdata", "html", "reuters")
 #' M <- MAXQDA$new(dbFilename = maxfile, htmlDir = htmlDir)
 #' annotationsDT <- M$getAll()
-#' }
 MAXQDA <- R6Class(
   
   "MAXQDA",
@@ -99,12 +98,12 @@ MAXQDA <- R6Class(
         offsetDT[["right_diff"]] <- offsetDT[["right"]] - .SD[["SegPos2X"]]
         ids <- offsetDT[left_diff >= 0][right_diff <= 0][["id"]]
         txt <- paste(
-          getTokenStream(corpus, left = ids[1], right = ids[length(ids)], pAttribute = "word"),
+          get_token_stream(corpus, left = ids[1], right = ids[length(ids)], p_attribute = "word"),
           collapse = " "
         )
         data.table(
           left = ids[1], right = ids[length(ids)],
-          txt = as.nativeEnc(txt, from = getEncoding(corpus)),
+          txt = as.nativeEnc(txt, from = encoding(corpus)),
           codeID = .SD[["WordID"]]
           )
       }

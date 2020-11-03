@@ -14,7 +14,7 @@ Toolset for a workflow to reshape a CoNLL input to a CWB compatible format.
 \examples{
 if (FALSE){
   use("GermaParl")
-  filename <- system.file(package = "polmineR.anno", "extdata", "CoNLL", "16_126_FDP_Markus_Loening_2871305.tsv")
+  filename <- system.file(package = "maxqda", "extdata", "CoNLL", "16_126_FDP_Markus_Loening_2871305.tsv")
   P <- partition("GERMAPARL", text_lp = "16", text_protocol_no = "126", text_speaker = "Markus Loening")
   Anno <- CoNLL$new(filename = filename, partition = P)
   Anno$getCorpusPositions()

@@ -14,9 +14,9 @@ Imports:
     DBI,
     RSQLite,
     tools,
-    htmltools
+    htmltools,
+    polmineR
 Suggests:
-    polmineR,
     knitr
 LazyData: true
 VignetteBuilder: knitr
