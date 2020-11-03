@@ -1,4 +1,4 @@
-#' polmineR.anno-package
+#' maxqda-package
 #' 
 #' @author Andreas Blaette (andreas.blaette@@uni-due.de)
 #' @references http://polmine.sowi.uni-due.de
