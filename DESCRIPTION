@@ -1,8 +1,8 @@
 Package: maxqda
 Type: Package
 Title: Use MAXQDA for Corpus Annotations
-Version: 0.3.3.9001
-Date: 2020-11-03
+Version: 0.4.0
+Date: 2020-11-04
 Author: Andreas Blaette
 Maintainer: Andreas Blaette <andreas.blaette@uni-due.de>
 Description: MAXQDA is a qualitative data analysis. This package provides functionality 
