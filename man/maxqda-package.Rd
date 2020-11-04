@@ -3,13 +3,16 @@
 \docType{package}
 \name{maxqda-package}
 \alias{maxqda-package}
+\alias{_PACKAGE}
 \alias{maxqda}
-\title{maxqda-package}
+\title{maxqda: Use MAXQDA for Corpus Annotations}
 \description{
-Process the MAXQDA database.
+To learn more about the 'maxqda' package,
+start with the vignette: \code{browseVignettes(package = "maxqda")}
 }
 \references{
-http://polmine.sowi.uni-due.de
+Kuckartz, Udo; Raediker, Stefan (2019): \emph{Analyzing Qualitative Data
+with MAXQDA.} Wiesbaden: Springer.
 }
 \author{
 Andreas Blaette (andreas.blaette@uni-due.de)

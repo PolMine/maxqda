@@ -14,7 +14,6 @@ Imports:
     DBI,
     RSQLite,
     tools,
-    htmltools,
     polmineR
 Suggests:
     knitr
@@ -23,7 +22,6 @@ VignetteBuilder: knitr
 License: GPL-3
 Collate:
     'maxqda-package.R'
-    'CoNLL.R'
     'MAXQDA.R'
 Encoding: UTF-8
 RoxygenNote: 7.1.1

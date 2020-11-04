@@ -1,157 +1,148 @@
 ---
-title: "maxqda - some sample workflows"
+title: "Introducing 'maxqda'"
 author: "Andreas Blätte (andreas.blaette@uni-due.de)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{maxqda - some sample workflows}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Introducing 'maxqda'}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib  
 ---
 
-```{r load_polmineR.anno, eval = FALSE}
+In text-based research, using Machine Learning (ML) very often involves annotating a set of texts. For large annotation tasks in teams, powerful server-based solutions such as [INCEpTION](https://inception-project.github.io/) offer specially designed and optimized solutions. Yet for more limited scenarios, a smaller solution may be a reasonable choice. The *maxqda* package presents an option to use  [MAXQDA](https://www.maxqda.com/), a leading commercial product for qualitative data analysis, for generating annotations that can be used in an ML scenario.
+
+Using MAXQDA to prepare annotations for an ML exercise may be reasonable if the following considerations apply: 
+
+- You think that the administrative cost to set up and maintain a server-based annotation environment are overly high.
+- You do not need specialized functionality (such as active learning, for instance) that only dedicated server-based solutions can offer.
+- You think that the time investment to acquaint and train coders to competently use a new annotation environment is high relative to the requirements of your project.
+- You have access to an institutional license of MAXQDA and using this commercial software product does not entail additional cost and obstacles to obtain the software.
+
+These considerations may be particularly pertinent for researchers from the social sciences with a university affiliation who are on a budget: You do not necessarily have software engineers at hand and the supportive structure to quickly set up and maintain a server for a small project, students as potential coders are very often acquainted with MAXQDA already,  and many universities have institutional licenses for MAXQDA, so using MAXQDA does not produce additional costs for  you project. Thus integrating MAXQDA into a ML-oriented research process is an option that may be particularly relevant for a Computational Social Science (CSS) context. 
+
+
+## Envisaged workflow - an overview
+
+ML was not what MAXQDA developers had in mind when developing their product. The thrust of MAXQDA is to offer a specialized tool for qualitative research [@Kuckartz2019]. But the flexibility of MAXQDA to handle different data formats, including HTML is the basis for the following workflow envisaged by the R package *maxqda*.
+
+- You export documents to be annotated from R as an HTML format. Invisibly, the HTML needs to wrap tokens into elements that declare token ids and character offset positions via attributes. The `html()` method of polmineR will do that for you if you set arguments ` 
+
+- Documents are imported into MAXQDA and are annotated according to a pre-established coding scheme.
+
+- After finishing the annotation, the projct file used by MAXQDA is evaluated using the `MAXQDA` class defined in the *maxqda* package. It returns a `data.table` with the information on the annotations that have been made based on token IDs.
+
+
+## Integrating MAXQDA in an R ML workflow
+
+### Generating the required HTML format
+
+The envisaged workflow requires that documents to be annotated are imported into MAXQDA as HTML documents. As MAXQDA stores information on annotations as character offset positions, the distinctive feature of the required HTML data format is that that they need to capture precise information about the character offset positions of tokens, and token ids. This is required for matching MAXQDA annotations on the data structure of your corpus.
+
+This information on tokens can be included in an HTML document without being visible for the user. MAXQDA will not complain about this hidden information. More precisely, each token needs to be wrapped into a 'span' element that defines the attributes "id", "offset_left" and "offset_right". This might look as follows:
+
+```{r sample_html, echo = FALSE}
+annan_xml <- xml2::read_html(
+  system.file(package = "maxqda", "extdata", "html", "unga", "annan.html")
+)
+paste0(lapply(
+  595951:595960, 
+  function(id) as.character(xml2::xml_find_all(annan_xml, xpath = sprintf('//span[@id="%d"]', id)))
+  ), collapse = ""
+)
+```
+
+This HTML data format includes a lot of overhead and hidden information to represent a simple sentence such as "I have the honour to present the millenium report.". But MAXQDA is able to handle that. 
+
+The user can leave it to the software used to generate the HTML that meets the specifications of our workflow. There are many ways to do that and you could develop your own tool. At this stage, the polmineR package offers the functionality to prepare what is needed out of the box: The `html()` method of polmineR will do that for you. The arguments `cpos` and `charoffset` simply need to be set as `TRUE`. 
+
+Save the HTML file to disk at a directory from where it can be imported into MAXQDA. If you generate a larger set of HTML files, put them in the same directory and ensure that no other files that shall no be processed are in the same directory. (In our sample code, we use a temporary directory.)
+
+```{r}
 library(polmineR)
+
+html_file <- tempfile(fileext = ".html")
+
+corpus("REUTERS") %>%
+  subset(id == 127) %>%
+  html(cpos = TRUE, charoffset = TRUE) %>%
+  cat(file = html_file)
+```
+
+
+### Annotating documents using MAXQDA
+
+Documents to be annotated need to be imported into MAXQDA for annotation. MAXQDA can handle HTML files without further any ado. As creating training data requires annotating a significant number of files, there will be usually a set of files you will import. So we reccommend to use MAXQDA's functionality for bulk import. If you have put all HTML files into one directory, tell MAXQDA to import all files in this directory at once.
+
+An ML annotation exercise will require that coders create annotations in line with one pre-established annotation scheme. The pre-established coding scheme relevant for your project can be imported easily.
+
+Preparing annotations for ML purposes requires hermeutic judgement. Guiding coders to make consistent judgements by a codebook is an established practice. Beyond this, keeping the annotations created simple may be a good choice from the perspective of the ML work package: MAXQDA has a functionality that goes far beyond what can be processed by ML at this stage. Basic usage of MAXQDA for annotating texts is straight forward. There are many training materials to learn how to use MAXQDA.
+
+
+### Extracting annotation data from MAXQDA files
+
+Annotation projects are stored by MAXQDA in files with an extension such as ".mx20". The last two digits in the filename indicate the MAXQDA version used when generating the file, referring to the year of the MAXQDA release: MAXQDA uses calendar versioning. So if a MAXQDA file ends with ".mx20", this indicates that the 2020 release of MAXQDA has been used. 
+
+MAXQDA's mx-files are [SQlite](https://www.sqlite.org) database files. This is a very common database file format. There are libraries for all programming languages to handle the sqlite3 databases. The R package [RSQlite]( https://CRAN.R-project.org/package=RSQLite) offers the interface to handle the sqlite3 file generated and used by MAXQDA. RSQlite is used internally by the *maxqda* package.
+
+There is no official MAXQDA API that would expose a documented access to annotations. Developing the approach of the *maxqda* R package to extract annotations from the mx files involved guessing how the MAXQDA project database is designed. But actually the database design is very intelligible. For basic document types such as TXT and HTML, MAXQDA stores annotations in a tabular format that defines start and end character offset positions in one table of the database that is crucial for extracting annotations from the database. Another relevant table within the database is a table with the codings used.
+
+The core (and almost single) functionality of the *maxqda* R package is to evaluate these tables, to map the annotation data on the input corpus data and to return a `data.table` that will present information on annotations that can be used and integrated in the subsequent stages of an R text mining workflow. 
+
+The package is a GitHub-only package at this stage - see the README.md file of the package for installation instructions. Load the package as usual.
+
+```{r load_maxqda, eval = TRUE}
 library(maxqda)
 ```
 
+The functionality of the package is organised by way of an [R6 reference class](https://adv-r.hadley.nz/r6.html). After loading the maxqda package, you get started to evaluate the MAXQDA sqlite3 project file by instantiating a MAXQDA (R6) class object, supplying information on the whereabouts of the MAXQDA sqlite3 project file (argument `dbFilename`) and the path of the directory where HTML files that had been imported into MAXQDA for annotation reside (argument `htmlDir`).
 
+The package includes some sample data derived from the REUTERS corpus and a sample MAXQDA database with some (rather arbitrary) annotations. We locate these files as follows ...
 
-```{r, eval = FALSE}
-dir <- "/Users/blaette/Lab/gitlab/plprbttxt_annotations/2016_09_21"
-filename <- file.path(dir, "16_173_SPD_Dr__Hans-Ulrich_Krüger_2978462.tsv")
-P <- partition("PLPRBT", speaker_lp = 16, speaker_protocol_no = 173, speaker_name = "Hans-Ulrich Krüger")
-A <- polmineR.anno:::CoNLL$new(filename = filename, partition = P)
-A$getCorpusPositions()
-A$cpos
+```{r locate_sample_data}
+dbFileSample <- system.file(package = "maxqda", "extdata", "maxqda", "reuters.mx12")
+htmlDirSample <- system.file(package = "maxqda", "extdata", "html", "reuters")
 ```
 
+And we instantiate the `MAXQDA` class supplying this information as described.
 
-```{r, eval = FALSE}
-filenames <- list.files(dir)
-Encoding(filenames) <- "UTF-8"
-speakerNames <- sAttributes("PLPRBT", "speaker_name")
-dtList <- pbapply::pblapply(
-  filenames,
-  function(filename){
-    
-    # get legislative period and session
-    lp <- gsub("^(\\d+)_.*?$", "\\1", filename)
-    sessionNo <- gsub("^\\d+_(\\d+)_.*?$", "\\1", filename)
-
-    # get party from filename
-    party <- gsub("^\\d+_\\d+_([0-9A-ZÜ_]+)_.*?$", "\\1", filename)
-    if (grepl("^.*NDNIS_90_DIE_.*$", filename)) party <- "B90_DIE_GRUENEN"
-    if (grepl("fraktionslos", filename)) party <- "fraktionslos"
-    if (party == "F_D_P_") party <- "FDP"
-    
-    # get speaker from filename
-    speakerName <- gsub("^(.*)_\\d+\\.tsv$", "\\1", filename)
-    speakerName <- gsub("^\\d+_\\d+_[0-9A-ZÜ_]+_(.*?)?$", "\\1", speakerName)
-    if (grepl("NEN_", speakerName)) speakerName <- gsub("^.*NEN_", "", speakerName)
-    speakerName <- gsub("_", " ", speakerName)
-    speakerName <- gsub("^Dr\\s", "", speakerName)
-    speakerName <- gsub("\\s+[A-Z]\\s+", " ", speakerName)
-    speakerName <- gsub("^-Ing\\s", "", speakerName)
-    speakerName <- gsub("^\\s*(.*?)\\s*$", "\\1", speakerName)
-    
-    # match filename-speaker 
-    if (speakerName %in% speakerNames){
-      isPresent <- speakerName
-    } else {
-      matches <- agrep(speakerName, speakerNames)
-      if (length(matches) > 0){
-        isPresent <- speakerNames[matches[1]]
-      } else {
-        tmp <- iconv(strsplit(speakerName, split = "")[[1]], from = "UTF-8", to = "ISO-8859-1")
-        tmp <- tmp[!is.na(tmp)]
-        speakerNameNew <- iconv(paste(tmp, collapse = ""), from = "ISO-8859-1", to = "UTF-8")
-        matches <- agrep(speakerNameNew, speakerNames)
-        if (length(matches) > 0){
-          isPresent <- speakerNames[matches[1]]
-        } else {
-          splitted <- strsplit(speakerName, " ")[[1]]
-          lastName <- splitted[length(splitted)]
-          lastTry <- grep(paste(lastName, "$", sep = ""), speakerNames, value = T)
-          if (length(lastTry) > 0){
-            isPresent <- lastTry[1]
-          } else {
-            isPresent <- "XXX"
-          }
-        }
-      }
-      
-    }
-    sAttributes <- data.table(
-      filename = filename,
-      speaker_lp = lp,
-      speaker_protocol_no = sessionNo,
-      speaker_parliamentary_group = party,
-      speaker_name = isPresent
-    )
-  }
-)
-dt <- rbindlist(dtList)
-dt[["speaker_name"]] <- enc2utf8(dt[["speaker_name"]]) # encodings are mixed 
-
-# manual correction of known problems
-dt[speaker_name == "Peter Glotz", speaker_name := "Peter Götz"]
-dt[speaker_name == "Heinrich L. Kolb", speaker_name := "Heinrich Leonhard Kolb"]
-dt[speaker_name == "Kersten Naumann", speaker_name := "Kersten Steinke"]
-dt[speaker_name == "Sevim Dagdelen", speaker_name := "Sevim Dadelen"]
+```{r instantiate_MAXQDA, eval = TRUE}
+reutersMX <- MAXQDA$new(dbFilename = dbFileSample, htmlDir = htmlDirSample)
 ```
 
+The `MAXQDA` class breaks down the steps required to evaluate the mx-file into a set of methods. The crucial method is `$getAll()` that will return a `data.frame` with the annotations. When evaluating MAXQDA annotations, the HTML files will be opened to extract information on character offset positions and token IDs. By default (argument `verbose = TRUE`), a message informs you which HTML file is processed. 
 
-```{r eval = FALSE}
-CoNLL_objects <- pbapply::pblapply(
-  setNames(1:nrow(tab), tab[["filename"]]),
-  function(i){
-    P <- partition(
-      "PLPRBT",
-      def = as.list(unlist(dt[i, c("speaker_protocol_no", "speaker_name", "speaker_lp")])),
-      verbose = FALSE
-      )
-    if (is.null(P)) return( NULL )
-    C <- CoNLL$new(filename = file.path(dir, filenames[i]), partition = P)
-    C$getCorpusPositions()
-    C
-  }
-)
+```{r get_annotation_data}
+annos <- reutersMX$getAll()
 ```
 
-### Check whether matches have been successful 
+The `data.table` that is returned has the following columns:
 
-```{r eval = FALSE}
-View(dt[which(sapply(CoNLL_objects, is.null) == TRUE)])
+- *left*: Left corpus position of the annotation. 
+- *right*: Right corpus position of the annotation.
+- *code*: The coding that has been assigned.
+- *txt*: The text that has been annotated.
+- *document*: Name of the document where the annotation occurrs.
+
+So this is how the sample annotations we had generated for the REUTERS corpus look like:
+
+```{r show_annotations_table}
+annos
 ```
 
-```{r eval = FALSE}
-regions <- rbindlist(lapply(CoNLL_objects, function(x) x$cpos))
-regions <- regions[is.na(cpos_left) == FALSE] # check why this is necessary!!
-setnames(regions, old = "id", new = "cap")
-```
+So the result is simple and straight forward. The information on character offset positions of annotations as stored in the MAXQDA project database has been transformed into information on token IDs (left and right corpus positions). 
 
-```{r eval = FALSE}
-regions[, quote := NULL]
-regions[, id = ]
-regionsToken <- regions[, {
-  data.table(
-    cpos_left = .SD[["cpos_left"]]:.SD[["cpos_right"]],
-    cpos_right = .SD[["cpos_left"]]:.SD[["cpos_right"]],
-    cap = .SD[["cap"]])
-  }, by = seq_len(nrow(regions))]
-regionsToken[,seq_len := NULL]
-regionsToken2 <- regionsToken[, {list(cap = paste(.SD[["cap"]], collapse = "|"))}, by = cpos_left]
-regionsToken2[, cpos_right := cpos_left]
-setcolorder(regionsToken2, neworder = c("cpos_left", "cpos_right", "cap"))
-```
+There is a set of relevant scenarios where this is all that you need to proceed to the genuine ML part of a project. Using MAXQDA for annotation is convenient, and getting information on annotations back into R is not complicated at all when you use the *maxqda* R package. 
 
-```{r eval = FALSE}
-library(ctk)
-Enc <- Encoder$new(
-  corpus = "PLPRBT",
-  registryDir = Sys.getenv("CORPUS_REGISTRY"),
-  dataDir = RegistryFile$new("PLPRBT")$getHome()
-  )
-Enc$metadata <- regionsToken2
-Enc$encodeStructuralAttribute("cap")
-```
+
+## Discussion
+
+The R package *maxqda* is handy but its approach is not universal: It requires HTML to meet a specification and it assumes that your corpus management system assigns unique IDs to tokens. This is how the Corpus Workbench (CWB) manages corpus data, as exposed to R with the polmineR package. Using polmineR, it is easy to generate the MAXQDA input data envisaged by the workflow this package assumes. If you use another toolset for analysing corpora, the way to using MAXQDA may involve writing code. This is a limitation of the approach we envisage here.
+
+Finally: MAXQDA is a mature commercial software product with an outstanding usability that is widely used in the social sciences. MAXQDA has become a very powerful and flexible research tool. But it's remaining charm is that it exposes the functionality for the annotation step in a research process involving ML in a very handy fashion. If you have an institutional access to MAXQDA licenses for yourself and for your team, if you do not need the whole functionality of a server-based specialized annotation environment and if your annotation task is limited, using MAXQDA for your ML-oriented annotation task may be an option to consider. The *maxqda* package gives you the functionality to realise this option.
+
+
+## References
+

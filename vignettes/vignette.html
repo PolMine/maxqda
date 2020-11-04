@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Andreas Blätte (andreas.blaette@uni-due.de)" />
+
+<meta name="date" content="2020-11-04" />
+
+<title>Introducing ‘maxqda’</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introducing ‘maxqda’</h1>
+<h4 class="author">Andreas Blätte (<a href="mailto:andreas.blaette@uni-due.de" class="email">andreas.blaette@uni-due.de</a>)</h4>
+<h4 class="date">2020-11-04</h4>
+
+
+
+<p>In text-based research, using Machine Learning (ML) very often involves annotating a set of texts. For large annotation tasks in teams, powerful server-based solutions such as <a href="https://inception-project.github.io/">INCEpTION</a> offer specially designed and optimized solutions. Yet for more limited scenarios, a smaller solution may be a reasonable choice. The <em>maxqda</em> package presents an option to use <a href="https://www.maxqda.com/">MAXQDA</a>, a leading commercial product for qualitative data analysis, for generating annotations that can be used in an ML scenario.</p>
+<p>Using MAXQDA to prepare annotations for an ML exercise may be reasonable if the following considerations apply:</p>
+<ul>
+<li>You think that the administrative cost to set up and maintain a server-based annotation environment are overly high.</li>
+<li>You do not need specialized functionality (such as active learning, for instance) that only dedicated server-based solutions can offer.</li>
+<li>You think that the time investment to acquaint and train coders to competently use a new annotation environment is high relative to the requirements of your project.</li>
+<li>You have access to an institutional license of MAXQDA and using this commercial software product does not entail additional cost and obstacles to obtain the software.</li>
+</ul>
+<p>These considerations may be particularly pertinent for researchers from the social sciences with a university affiliation who are on a budget: You do not necessarily have software engineers at hand and the supportive structure to quickly set up and maintain a server for a small project, students as potential coders are very often acquainted with MAXQDA already, and many universities have institutional licenses for MAXQDA, so using MAXQDA does not produce additional costs for you project. Thus integrating MAXQDA into a ML-oriented research process is an option that may be particularly relevant for a Computational Social Science (CSS) context.</p>
+<div id="envisaged-workflow---an-overview" class="section level2">
+<h2>Envisaged workflow - an overview</h2>
+<p>ML was not what MAXQDA developers had in mind when developing their product. The thrust of MAXQDA is to offer a specialized tool for qualitative research <span class="citation">(Kuckartz 20190)</span>. But the flexibility of MAXQDA to handle different data formats, including HTML is the basis for the following workflow.</p>
+<ul>
+<li><p>You export documents to be annotated from R as an HTML format. Invisibly, the HTML needs to wrap tokens in elements that declare token ids and character offset positions via attributes. The <code>html()</code> method of polmineR will do that for you if you set arguments `</p></li>
+<li><p>Documents are imported into MAXQDA and are annotated according to a pre-established coding scheme.</p></li>
+<li><p>After finishing the annotation, the file used by MAXQDA is evaluated using the <code>MAXQDA</code> class defined in the maxqda package. It returns a <code>data.table</code> that keeps the essential information on the annotations that have been made.</p></li>
+</ul>
+</div>
+<div id="how-to-use-maxqda" class="section level2">
+<h2>How to use MAXQDA</h2>
+<div id="generating-the-required-html-format" class="section level3">
+<h3>Generating the required HTML format</h3>
+<p>The envisaged workflow requires that documents to be annotated are imported into MAXQDA as HTML documents. As MAXQDA stores information on annotations as character offset, the distinctive feature of these HTML documents is that that they need to capture precise information about the character offset positions of tokens and token ids. This is required for matching MAXQDA annotations on the data structure of your corpus.</p>
+<p>This information can be included in an HTML document without being visible for the user. MAXQDA will not complain about this hidden information. Essentially, each token needs to be wrapped into a ‘span’ element that defines the attributes id, offset_left and offset_right. This might look as follows:</p>
+<pre><code>## [1] &quot;&lt;span id=\&quot;595951\&quot; token=\&quot;I\&quot; class=\&quot;fulltext\&quot; left=\&quot;66\&quot; right=\&quot;67\&quot;&gt;I&lt;/span&gt;&lt;span id=\&quot;595952\&quot; token=\&quot;have\&quot; class=\&quot;fulltext\&quot; left=\&quot;68\&quot; right=\&quot;72\&quot;&gt;have&lt;/span&gt;&lt;span id=\&quot;595953\&quot; token=\&quot;the\&quot; class=\&quot;fulltext\&quot; left=\&quot;73\&quot; right=\&quot;76\&quot;&gt;the&lt;/span&gt;&lt;span id=\&quot;595954\&quot; token=\&quot;honour\&quot; class=\&quot;fulltext\&quot; left=\&quot;77\&quot; right=\&quot;83\&quot;&gt;honour&lt;/span&gt;&lt;span id=\&quot;595955\&quot; token=\&quot;to\&quot; class=\&quot;fulltext\&quot; left=\&quot;84\&quot; right=\&quot;86\&quot;&gt;to&lt;/span&gt;&lt;span id=\&quot;595956\&quot; token=\&quot;present\&quot; class=\&quot;fulltext\&quot; left=\&quot;87\&quot; right=\&quot;94\&quot;&gt;present&lt;/span&gt;&lt;span id=\&quot;595957\&quot; token=\&quot;my\&quot; class=\&quot;fulltext\&quot; left=\&quot;95\&quot; right=\&quot;97\&quot;&gt;my&lt;/span&gt;&lt;span id=\&quot;595958\&quot; token=\&quot;millennium\&quot; class=\&quot;fulltext\&quot; left=\&quot;98\&quot; right=\&quot;108\&quot;&gt;millennium&lt;/span&gt;&lt;span id=\&quot;595959\&quot; token=\&quot;report\&quot; class=\&quot;fulltext\&quot; left=\&quot;109\&quot; right=\&quot;115\&quot;&gt;report&lt;/span&gt;&lt;span id=\&quot;595960\&quot; token=\&quot;.\&quot; class=\&quot;fulltext\&quot; left=\&quot;116\&quot; right=\&quot;117\&quot;&gt;.&lt;/span&gt;&quot;</code></pre>
+<p>This HTML data format includes a lot of overhead and hidden information to represent a simple sentence such as “I have the honour to present the millenium report.”, but MAXQDA is able to handle that. And the user can leave it to a tool to generate the HTML that meets specifications. There are many ways to do that and you could develop your own tool. At this stage, the polmineR package offers the functionality to prepare what is needed out of the box.</p>
+<p>The <code>html()</code> method of polmineR will do that for you. The important part is that argument <code>cpos</code> and <code>charoffset</code> both need to be set as <code>TRUE</code>. Save the HTML file to disk at a directory from where it can be imported into MAXQDA. If you generate a larger set of HTML files, put them in the same directory and ensure that no other files that shall no be processed are in the same directory.</p>
+<p>In our sample code, we use a temporary directory though.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(polmineR)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>html_file &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.html&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">corpus</span>(<span class="st">&quot;REUTERS&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw">subset</span>(id <span class="op">==</span><span class="st"> </span><span class="dv">127</span>) <span class="op">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">  </span><span class="kw">html</span>(<span class="dt">cpos =</span> <span class="ot">TRUE</span>, <span class="dt">charoffset =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="st">  </span><span class="kw">cat</span>(<span class="dt">file =</span> html_file)</span></code></pre></div>
+</div>
+<div id="annotating-documents-using-maxqda" class="section level3">
+<h3>Annotating documents using MAXQDA</h3>
+<p>Documents to be annotated need to be imported into MAXQDA for annotation. MAXQDA can handle HTML files without further any ado. As creating training data requires annotating a significant number of files, there will be a set of files you will import. So we reccommend to use MAXQDA’s functionality for bulk import. If you have put all HTML files into one directory, tell MAXQDA to import all files in this directory at once.</p>
+<p>Using MAXQDA for annotating texts is straight forward. There are many training materials to learn how to use MAXQDA. An ML annotation exercise will require that coders create annotations in line with one pre-established annotation scheme. The pre-established coding scheme relevant for your project can be imported easily.</p>
+<p>Finally: Preparing annotations for ML purposes requires hermeutic judgement. Guiding coders to make consistent judgements by a codebook is an established practice. Beyond this, keeping the annotations created simple may be a good choice from the perspective of the ML work package: MAXQDA has a functionality that goes far beyond what can be processed by ML at this stage.</p>
+</div>
+<div id="extracting-annotation-data-from-maxqda-files" class="section level3">
+<h3>Extracting annotation data from MAXQDA files</h3>
+<p>Annotation projects are stored by MAXQDA in files with an extension such as “.mx20”. The last two digits in the filename indicate the MAXQDA version used when generating the file, referring to the year of the MAXQDA release: MAXQDA uses calendar versioning. So if a MAXQDA file ends with “.mx20”, this indicates that the 2020 release of MAXQDA has been used.</p>
+<p>This file is a <a href="https://www.sqlite.org">SQlite</a> database file. This is a very common database file format. There are libraries for all programming languages to handle the sqlite3 databases. The R package <a href="https://CRAN.R-project.org/package=RSQLite">RSQlite</a> offers the interface to handle the sqlite3 file generated and used by MAXQDA.</p>
+<p>There is no official MAXQDA API that would expose a documented access to annotations. Developing the approach of the maxqda R package to extract annotations from the mx files involved guessing how the MAXQDA project database is designed. But actually the database design is very intelligible. For basic document types such as TXT and HTML, MAXQDA stores annotations in a tabular format that defines start and end character offset positions in one table of the database that is crucial for extracting annotations from the database. Another important table within the database is a table with the codings used.</p>
+<p>The core (and almost single) functionality of the maxqda R package is to evaluate these tables, to map the annotation data on the input corpus data and to return a <code>data.table</code> that will present information on annotations that can be used and integrated in the subsequent stages of an R text mining workflow.</p>
+<p>The package is a GitHub-only package at this stage - see the README.md file of the package for installation instructions. Load the package as usual.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(maxqda)</span></code></pre></div>
+<p>The functionality of the package is organised by way of an <a href="https://adv-r.hadley.nz/r6.html">R6 reference class</a>. After loading the maxqda package, you get started to evaluate the MAXQDA sqlite3 project file by instantiating a MAXQDA (R6) class object, supplying information on the whereabouts of the MAXQDA sqlite3 project file (argument <code>dbFilename</code>) and the path of the directory where HTML files that had been imported into MAXQDA for annotation reside (argument <code>htmlDir</code>).</p>
+<p>The package includes some sample data derived from the REUTERS corpus and a sample MAXQDA database with some (rather arbitrary) annotations. We locate these files as follows …</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dbFileSample &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;maxqda&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;maxqda&quot;</span>, <span class="st">&quot;reuters.mx12&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>htmlDirSample &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;maxqda&quot;</span>, <span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;html&quot;</span>, <span class="st">&quot;reuters&quot;</span>)</span></code></pre></div>
+<p>And we instantiate the <code>MAXQDA</code> class supplying this information as described.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>reutersMX &lt;-<span class="st"> </span>MAXQDA<span class="op">$</span><span class="kw">new</span>(<span class="dt">dbFilename =</span> dbFileSample, <span class="dt">htmlDir =</span> htmlDirSample)</span></code></pre></div>
+<p>The <code>MAXQDA</code> class breaks down the steps required to evaluate the mx-file into a set of methods. The magic method is <code>$getAll()</code> that will return a <code>data.frame</code> with the annotations. When evaluating MAXQDA annotations, the HTML files will be opened to extract information on character offset positions and token IDs. By default (argument <code>verbose = TRUE</code>), a message informs you which HTML file is processed.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>annos &lt;-<span class="st"> </span>reutersMX<span class="op">$</span><span class="kw">getAll</span>()</span></code></pre></div>
+<pre><code>## ... processing: argentina</code></pre>
+<pre><code>## ... processing: canada</code></pre>
+<pre><code>## ... processing: kuwait</code></pre>
+<pre><code>## ... processing: qatar</code></pre>
+<p>The <code>data.table</code> has the following columns:</p>
+<ul>
+<li><em>left</em>: Left corpus position of the annotation.</li>
+<li><em>right</em>: Right corpus position of the annotation.</li>
+<li><em>code</em>: The coding that has been assigned.</li>
+<li><em>txt</em>: The text that has been annotated.</li>
+<li><em>document</em>: Name of the document where the annotation occurrs.</li>
+</ul>
+<p>So this is how the sample annotations we had generated for the REUTERS corpus look like:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>annos</span></code></pre></div>
+<pre><code>##     left right          code                   txt  document
+##  1: 3998  3999 energy source             crude oil argentina
+##  2: 4006  4007          date          January 1987 argentina
+##  3: 4017  4018          date          January 1986 argentina
+##  4: 4018  4019      quantity      1986 Yacimientos argentina
+##  5: 4025  4026 energy source           natural gas argentina
+##  6:  548   549 energy source             crude oil    canada
+##  7:  584   585 energy source             crude oil    canada
+##  8: 3095  3095 energy source                   oil    kuwait
+##  9: 3143  3144 energy source             Crude oil    kuwait
+## 10: 1818  1818 energy source                   oil     qatar
+## 11: 1837  1838          date            early 1985     qatar
+## 12: 1854  1856      quantity    7.3 billion riyals     qatar
+## 13: 1874  1875          date             year 1987     qatar
+## 14: 1896  1898      quantity 12.217 billion riyals     qatar
+## 15: 1911  1913      quantity   15.6 billion riyals     qatar
+## 16: 2021  2021          date                  1986     qatar
+## 17: 2041  2041          date                  1987     qatar
+## 18: 2044  2046      quantity  2.766 billion riyals     qatar
+## 19: 2098  2099      quantity       285,000 barrels     qatar</code></pre>
+<p>So the result is simple and straight forward. The information on character offset positions of annotations as stored in the MAXQDA project database has been transformed into information on token IDs (left and right corpus positions). There is a set of relevant scenarios where this is all that you need to proceed to the genuine ML part of a project. Using MAXQDA for annotation is convenient, and getting information on annotations back into R is not complicated at all when you use the <em>maxqda</em> R package.</p>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2>Discussion</h2>
+<p>The R package <em>maxqda</em> is handy but its approach is not universal: It requires that HTML files meeting a specification are imported into MAXQDA and it assumes that your corpus management system assigns unique IDs to tokens. This is how the Corpus Workbench (CWB) manages corpus data, as exposed to R with the polmineR package. Using polmineR, it is easy to generate the MAXQDA input data envisaged by the workflow this package assumes. If you use another toolset for analysing corpora, the way to using MAXQDA may involve writing code. This is a limitation of the approach we envisage here.</p>
+<p>To conclude: MAXQDA is a mature commercial software product with an outstanding usability that is widely used in the social sciences. MAXQDA has become a very powerful and flexible research tool. But it’s remaining charm is that it exposes the functionality for the annotation step in a research process involving ML in a very handy fashion. If you have an institutional access to MAXQDA licenses for yourself and for your team, if you do not need the whole functionality of a server-based specialized annotation environment and if your annotation task is limited, using MAXQDA for your ML-oriented annotation task may be an option to consider. The <em>maxqda</em> package gives you the functionality to realise this option.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Kuckartz2019">
+<p>Kuckartz, Stefan, Udo; Raediker. 20190. <em>Analyzing Qualitative Data with Maxqda</em>. Wiesbaden: Springer.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

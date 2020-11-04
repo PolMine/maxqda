@@ -7,7 +7,7 @@
 #' @export MAXQDA
 #' @importFrom R6 R6Class
 #' @importFrom xml2 read_html xml_find_all xml_attrs
-#' @importFrom data.table data.table as.data.table setkeyv setorderv
+#' @importFrom data.table data.table as.data.table setkeyv setorderv setcolorder rbindlist
 #' @importFrom DBI dbConnect dbGetQuery dbDisconnect
 #' @importFrom RSQLite SQLite
 #' @importFrom tools file_path_sans_ext
